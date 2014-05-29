@@ -1,0 +1,92 @@
+<div class="page-header">
+	<h1>New Request</h1>
+</div>
+
+<div class="container">
+	<div class="row">
+		<!-- ================================== SR menu =================================  -->
+		<div class="menu col-md-3">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="btn btn-primary" data-ng-click="sr='IMS'">Increase Mailbox Size</li>
+				<li class="btn btn-primary" data-ng-click="sr='BDE'">Bulk DDL Extract</li>
+			</ul>
+			<br>
+			<a href="#/" type="button" class="btn btn-danger">Cancel</a>
+		</div>
+		<!-- ================================== SR form space =================================  -->
+		<div class="col-md-4 panel panel-default">
+			<br>
+			<h4 ng-if="sr==='None'">
+				Select a Service Request from the menu to the left
+			</h4>
+			<!-- ================================== Increase Mailbox Size form ==================================== -->
+			<form role="form" ng-if="sr==='IMS'" ng-submit="submitIMS()">
+				<div class="form-group">
+					<label for="inputTicketId">ServiceNow Ticket Id</label>
+					<input 	id="inputTicketId" 
+							type="text" 
+							class="form-control" 
+							placeholder="Enter ServiceNow Ticket Id here" 
+							required 
+							ng-model="ims.snTicketId"
+							name="snTicketId"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="inputSSOId">SSO Id</label>
+					<input 	id="inputSSOId" 
+							type="text" 
+							class="form-control" 
+							placeholder="Enter SSO Id here" 
+							required 
+							ng-pattern="/\d+/"
+							ng-model="ims.ssoId"
+							name="ssoId"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="inputNewMBoxSize">New Mailbox size (MB)</label>
+					<input 	id="inputNewMBoxSize" 
+							type="number" 
+							min="100" 
+							step="50" 
+							class="form-control" 
+							required 
+							ng-model="ims.reqSize"
+							name="reqSize"
+					/>
+				</div>
+				<input type="submit" class="btn btn-success" value="Submit" />
+			</form>
+			
+			<!-- ================================== Bulk DDL Extract form ==================================== -->
+			<form role="form" ng-if="sr==='BDE'" ng-submit="submitBDE()">
+				<div class="form-group">
+					<label for="inputTicketId">ServiceNow Ticket Id</label>
+					<input 	id="inputTicketId" 
+							type="text" 
+							class="form-control" 
+							placeholder="Enter ServiceNow Ticket Id here" 
+							required 
+							ng-model="bde.snTicketId"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="inputDDLName">DDL Name</label>
+					<input 	id="inputDDLName" 
+							type="text" 
+							class="form-control" 
+							placeholder="Enter name of Dynamic Distribution List here" 
+							required 
+							ng-model="bde.ddlName"
+					/>
+				</div>
+				<input type="submit" class="btn btn-success" value="Submit" />
+			</form>
+			<br>
+		</div>
+		<div class="col-md-1"></div>
+		<!-- ================================== Put some help text here? =================================  -->
+		<div class="col-md-4"></div>
+	</div>
+</div>

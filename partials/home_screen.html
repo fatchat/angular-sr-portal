@@ -1,0 +1,56 @@
+<div class="page-header">
+	<h1>Service Requests</h1>
+</div>
+
+<div class="container">
+	<!-- ============================ New Request Button =========================== -->
+	<a href="#/new-request" type="button" class="btn btn-primary btn-lg" id="btn_new_request">
+		New Request
+	</a>
+	<!-- ============================== List requests =============================== -->
+	<table class="table table-striped">
+		<!-- === Table header === -->
+		<thead>
+			<tr>
+				<td><strong>Workflow</strong></td>
+				<td><strong>Request Time</strong></td>
+				<td><strong>ServiceNow Ticket Id</strong></td>
+				<td><strong>Comments</strong></td>
+				<td><strong>Status</strong></td>
+				<td></td>
+			</tr>
+		</thead>
+		<!-- === Table body === -->
+		<tbody id="workflow_list">
+			<tr data-ng-repeat="sr in serviceRequests">
+				<td>{{sr.fullWFName}}</td>
+				<td>{{sr.reqTime}}</td>
+<!--				
+<td><button popover-placement="bottom" popover="{{sr.wfDetails}}" class="btn">{{sr.snTicketId}}</button></td>
+-->
+				<td class="dropdown">
+					<a class="dropdown-toggle">{{sr.snTicketId}}</a>
+<!--				
+<ul class="dropdown-menu">
+	<li ng-repeat="wfDetail in sr.wfDetails">
+		<strong>{{wfDetail.key}}:</strong> {{wfDetail.value}}
+	</li>
+</ul>
+-->
+					<table class="table dropdown-menu">
+						<tbody>
+							<tr ng-repeat="p in sr.wfParams">
+								<td class="small">{{p.param}}</td>
+								<td class="small">{{p.value}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+				<td ng-if="sr.wfName !== 'BDE' || sr.results === null || sr.status === 'Failure'">{{sr.comments}}</td>
+				<td ng-if="sr.results !== null && sr.results !== undefined && sr.status === 'Success'"><my-download get-data="getCSV(sr)" /></td>
+				<td><span class="label {{sr.status_label}}">{{sr.status}}</span></td>
+				<td><button class="btn btn-primary" data-ng-click="closeRequest(sr.snTicketId)">Clear</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

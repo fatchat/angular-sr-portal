@@ -1,0 +1,31 @@
+<div class="page-header">
+	<h1>Approve a Request</h1>
+</div>
+
+<div class="container">
+	<!-- ============================== List requests =============================== -->
+	<table class="table table-striped">
+		<!-- === Table header === -->
+		<thead>
+			<tr>
+				<td><strong>Request Time</strong></td>
+				<td><strong>ServiceNow Ticket Id</strong></td>
+				<td><strong>SSO Id</strong></td>
+				<td><strong>Requested Size</strong></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</thead>
+		<!-- === Table body === -->
+		<tbody id="approval_list">
+			<tr data-ng-repeat="pendingApproval in pendingApprovals">
+				<td>{{pendingApproval.reqTime}}</td>
+				<td>{{pendingApproval.snTicketId}}</td>
+				<td>{{pendingApproval.ssoId}}</td>
+				<td>{{pendingApproval.reqSize}}</td>
+				<td><button class="btn btn-success" data-ng-click="respondToRequest(pendingApproval.snTicketId, 'Yes')">Approve</button></td>
+				<td><button class="btn btn-danger" data-ng-click="respondToRequest(pendingApproval.snTicketId, 'No')">Deny</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
